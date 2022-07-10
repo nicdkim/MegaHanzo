@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Movie">
+	<select id="getMovieCnt" resultType="_int">
+		select count(*) from movie
+	</select>
+	<select id="getMovieList" resultType="moviedto">
+		select * from movie order by movieid desc
+	</select>
+	<select id="getMovieListWithKey" parameterType="string" resultType="moviedto">
+		<!-- select * from test_board where boardtitle like ('%apple%') -->
+		<!-- mybatis에서 ${변수명} 은 세팅을 할 때 양옆에 ' 가 없이 세팅을 해준다. -->
+		select * from movie where movietitle like('%${keyword}%')
+		order by movieid desc
+	</select>
+	<select id="getMovieListByRate" resultType="moviedto">
+		select * from movie order by movierate desc
+	</select>
+	<select id="getMovieListByRateWithKey" parameterType="string" resultType="moviedto">
+		select * from movie where movietitle like('%${keyword}%')
+		order by movierate desc
+	</select>
+	<select id="getMovieListByTicket" resultType="moviedto">
+		select * from movie order by movieticketcnt desc
+	</select>
+	<select id="getMovieByTitle" parameterType="string" resultType="moviedto">
+		select * from movie where movietitle=#{movietitle}
+	</select>
+	<select id="getMovieListByTicketWithKey" parameterType="string" resultType="moviedto">
+		select * from movie where movietitle like('%${keyword}%')
+		order by movieticketcnt desc
+	</select>
+	
+	
+	<select id="getLastNum" resultType="_int">
+		select max(movieid) from movie
+	</select>
+	<select id="getDetail" parameterType="_int" resultType="moviedto">
+		select * from movie where movieid=#{movieid}
+	</select>
+	
+	<insert id="insertMovie" parameterType="moviedto">
+		insert into movie (movietitle,moviegenre,movietime,movielike,movierate
+,movieinfo,movieage,movieactor,moviedirect,moviedate)
+		values(#{movietitle},#{moviegenre},#{movietime},#{movielike},#{movierate},
+		#{movieinfo},#{movieage},#{movieactor},#{moviedirect},#{moviedate})
+	</insert>
+	
+	<update id="updateMovie" parameterType="moviedto">
+		update movie set movietitle = #{movietitle}, moviegenre = #{moviegenre},
+		movietime = #{movietime}, movielike = #{movielike}, movierate = #{movierate}, 
+		movieinfo = #{movieinfo}, movieage = #{movieage}, movieactor = #{movieactor},
+		moviedirect = #{moviedirect}, moviedate = #{moviedate} where movieid = #{movieid}
+	</update>
+	<update id="updateMovieRate" parameterType="hashmap">
+		update movie set movierate = ((movierate * (#{reviewcnt}-1)) + #{reviewstar})/#{reviewcnt} where movieid = #{movieid}
+	</update>
+	<update id="updateMovieRateByModify" parameterType="hashmap">
+		update movie set movierate = (movierate * #{reviewcnt} - #{star} + #{reviewstar})/#{reviewcnt} where movieid = #{movieid}
+	</update>
+	<update id="updateMovieRateByRemove" parameterType="hashmap">
+		update movie set movierate = (movierate * (#{reviewcnt}+1) - #{star})/#{reviewcnt} where movieid = #{movieid}
+	</update>
+	<update id="updateMovieRateByZero" parameterType="_int">
+		update movie set movierate = 0.00 where movieid = #{movieid}
+	</update>
+	<update id="buyMovieTicket" parameterType="hashmap">
+		update movie set movieticketcnt=movieticketcnt+#{cnt} where movieid=#{movieid}
+	</update>
+	<update id="cancelMovieTicket" parameterType="hashmap">
+		update movie set movieticketcnt=movieticketcnt-#{cnt} where movieid=#{movieid}
+	</update>
+	
+	<delete id="removeMovie" parameterType="_int">
+		delete from movie where movieid=#{movieid}
+	</delete>
+	
+	
+	
+	
+	<!-- Review -->
+	
+	
+	<select id="getReviewCnt" parameterType="_int" resultType="_int">
+		select count(*) from review where movieid=#{movieid}
+	</select>
+	<select id="getReviewTotalCnt" parameterType="_int" resultType="_int">
+		select count(*) from review
+	</select>
+	<select id="getReviews" parameterType="_int" resultType="reviewdto">
+		select * from review where movieid=#{movieid}
+	</select>
+	<select id="getReviewList" parameterType="hashmap" resultType="reviewdto">
+		select * from review order by reviewid desc limit #{startRow},#{pageSize}
+	</select>
+	<select id="getReviewListWithKey" parameterType="hashmap" resultType="reviewdto">
+		<!-- select * from test_board where boardtitle like ('%apple%') -->
+		<!-- mybatis에서 ${변수명} 은 세팅을 할 때 양옆에 ' 가 없이 세팅을 해준다. -->
+		select * from review where reviewtitle like('%${keyword}%')
+		order by reviewid desc limit #{startRow},#{pageSize}
+	</select>
+	<select id="getReviewListByMovie" parameterType="hashmap" resultType="reviewdto">
+		select * from review where movieid=#{movieid} order by reviewid desc limit #{startRow},#{pageSize}
+	</select>
+	<select id="getLastReviewid" resultType="_int">
+		select max(reviewid) from review
+	</select>
+	<select id="getReviewDetail" parameterType="_int" resultType="reviewdto">
+		select * from review where reviewid=#{reviewid}
+	</select>
+	
+	<insert id="insertReview" parameterType="reviewdto">
+		insert into review (userid,movieid,reviewcontents,reviewstar)
+		values(#{userid},#{movieid},#{reviewcontents},#{reviewstar})
+	</insert>
+	
+	<update id="modifyReview" parameterType="hashmap">
+		update review set reviewcontents=#{reviewcontents}, reviewstar=#{reviewstar}, updatechk='o'
+		where reviewid=#{reviewid}
+	</update>
+	<update id="modifyBigReview" parameterType="reviewdto">
+		update review set reviewcontents=#{reviewcontents}, reviewstar=#{reviewstar}, updatechk='o', movieid=#{movieid}
+		where reviewid=#{reviewid}
+	</update>
+	<update id="updateReadCount" parameterType="_int">
+		update review set readcount = readcount+1 where reviewid=#{reviewid}
+	</update>
+	
+	<delete id="removeReview" parameterType="_int">
+		delete from review where reviewid=#{reviewid}
+	</delete>
+</mapper>
+
+
+
+

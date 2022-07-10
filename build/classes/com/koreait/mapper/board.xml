@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+	<select id="getBoardCnt" resultType="_int">
+		select count(*) from board
+	</select>
+	<select id="getBoardList" parameterType="hashmap" resultType="boarddto">
+		select * from board order by boardnum desc limit #{startRow},#{pageSize}
+	</select>
+	<select id="getBoardListWithKey" parameterType="hashmap" resultType="boarddto">
+		<!-- select * from test_board where boardtitle like ('%apple%') -->
+		<!-- mybatis에서 ${변수명} 은 세팅을 할 때 양옆에 ' 가 없이 세팅을 해준다. -->
+		select * from board where boardtitle like('%${keyword}%')
+		order by boardnum desc limit #{startRow},#{pageSize}
+	</select>
+	<select id="getLastNum" parameterType="string" resultType="_int">
+		select max(boardnum) from board where userid=#{userid}
+	</select>
+	<select id="getDetail" parameterType="_int" resultType="boarddto">
+		select * from board where boardnum=#{boardnum}
+	</select>
+	<select id="getReplies" parameterType="_int" resultType="replydto">
+		select * from reply where boardnum=#{boardnum}
+	</select>
+	
+	<insert id="insertBoard" parameterType="boarddto">
+		insert into board (boardtitle, boardcontents, userid)
+		values(#{boardtitle},#{boardcontents},#{userid})
+	</insert>
+	<insert id="insertReply" parameterType="replydto">
+		insert into reply (userid,boardnum,replycontents)
+		values(#{userid},#{boardnum},#{replycontents})
+	</insert>
+	
+	<update id="updateReadCount" parameterType="_int">
+		update board set readcount = readcount+1 where boardnum=#{boardnum}
+	</update>
+	<update id="updateBoard" parameterType="boarddto">
+		update board set boardtitle = #{boardtitle}, boardcontents = #{boardcontents}
+		where boardnum = #{boardnum}
+	</update>
+	<update id="modifyReply" parameterType="hashmap">
+		update reply set replycontents=#{replycontents}, updatechk='o'
+		where replynum=#{replynum}
+	</update>
+	
+	<delete id="removeBoard" parameterType="_int">
+		delete from board where boardnum=#{boardnum}
+	</delete>
+	<delete id="removeReply" parameterType="_int">
+		delete from reply where replynum=#{replynum}
+	</delete>
+</mapper>

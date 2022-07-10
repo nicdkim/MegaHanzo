@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+	<insert id="join" parameterType="com.koreait.app.user.dao.UserDTO">
+		insert into user values(#{userid},#{userpw},#{username},
+		#{userage},#{userphone},#{zipcode},#{addr},#{addrdetail},#{addretc},0)
+	</insert>
+	<select id="getUserCnt" resultType="_int">
+		select count(*) from user
+	</select>
+	<select id="checkId" parameterType="string" resultType="_int">
+		select count(*) from user where userid = #{userid}
+	</select>
+	<select id="getUserList" parameterType="hashmap" resultType="userdto">
+		select * from user order by useradmin desc limit #{startRow},#{pageSize}
+	</select>
+	<select id="getUserListWithKey" parameterType="hashmap" resultType="userdto">
+		<!-- select * from test_board where boardtitle like ('%apple%') -->
+		<!-- mybatis에서 ${변수명} 은 세팅을 할 때 양옆에 ' 가 없이 세팅을 해준다. -->
+		select * from user where userid like('%${keyword}%')
+		order by useradmin desc limit #{startRow},#{pageSize}
+	</select>
+	<select id="getDetail" parameterType="string" resultType="userdto">
+		select * from user where userid=#{userid}
+	</select>
+	<select id="checkAdmin" parameterType="string" resultType="_int">
+		select count(*) from user where useradmin = 1 and userid = #{userid}
+	</select>
+	<select id="login" parameterType="hashmap" resultType="com.koreait.app.user.dao.UserDTO">
+		select * from user where userid = #{userid} and userpw = #{userpw}
+	</select>
+	<select id="id_find" parameterType="hashmap" resultType="com.koreait.app.user.dao.UserDTO">
+		select * from user where username = #{username} and userphone = #{userphone}
+	</select>
+	<select id="pw_find" parameterType="hashmap" resultType="com.koreait.app.user.dao.UserDTO">
+		select * from user where userid = #{userid} and userphone = #{userphone}
+	</select>
+	
+	<update id="updateUser" parameterType="userdto">
+		update user set userid = #{userid}, userpw = #{userpw},
+		username = #{username}, userage = #{userage}, userphone = #{userphone}, 
+		zipcode = #{zipcode}, addr = #{addr}, addrdetail = #{addrdetail},
+		addretc = #{addretc} where userid = #{userid}
+	</update>
+	<update id="changeRole" parameterType="string">
+		update user set useradmin = 1 and useradmin = 0 where userid = #{userid}
+	</update>
+	
+	<delete id="removeUser" parameterType="string">
+		delete from user where userid=#{userid}
+	</delete>
+</mapper>

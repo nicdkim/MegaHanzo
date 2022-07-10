@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+  <typeAliases>
+  	<typeAlias type="com.koreait.app.user.dao.UserDTO" alias="userdto"/>
+  	<typeAlias type="com.koreait.app.movie.dao.MovieDTO" alias="moviedto"/>
+  	<typeAlias type="com.koreait.app.movie.dao.FileDTO" alias="filedto"/>
+  	<typeAlias type="com.koreait.app.movie.dao.ReviewDTO" alias="reviewdto"/>
+  	<typeAlias type="com.koreait.app.board.dao.BoardDTO" alias="boarddto"/>
+  	<typeAlias type="com.koreait.app.board.dao.ReplyDTO" alias="replydto"/>
+  	<typeAlias type="com.koreait.app.ticketing.dao.CinemaDTO" alias="cinemadto"/>
+  	<typeAlias type="com.koreait.app.ticketing.dao.TimeDTO" alias="timedto"/>
+  	<typeAlias type="com.koreait.app.ticketing.dao.SeatDTO" alias="seatdto"/>
+  	<typeAlias type="com.koreait.app.ticketing.dao.TicketingDTO" alias="ticketingdto"/>
+  </typeAliases>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/movieticketing"/>
+        <property name="username" value="root"/>
+        <property name="password" value="1234"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+  	<mapper resource="com/koreait/mapper/user.xml"/>
+  	<mapper resource="com/koreait/mapper/movie.xml"/>
+  	<mapper resource="com/koreait/mapper/board.xml"/>
+  	<mapper resource="com/koreait/mapper/file.xml"/>
+  	<mapper resource="com/koreait/mapper/ticketing.xml"/>
+  </mappers>
+</configuration>

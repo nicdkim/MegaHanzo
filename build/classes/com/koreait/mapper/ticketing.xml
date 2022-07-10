@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Ticketing">
+	<select id="getUserTicketingList" parameterType="hashmap" resultType="ticketingdto">
+		select * from ticketing where userid=#{userid} order by ticketingid desc limit ${startRow},${pageSize}
+	</select>
+	<select id="getTicketingTimeList" parameterType="hashmap" resultType="timedto">
+		select * from `time` where movietitle=#{movietitle} order by cinemaid asc limit ${startRow},${pageSize}
+	</select>
+	<select id="getTimeListByTitle" parameterType="string" resultType="timedto">
+		select * from `time` where movietitle=#{movietitle}
+	</select>
+	<select id="getTimeList" resultType="timedto">
+		select * from `time` order by cinemaid
+	</select>
+	<select id="getTicketingCinemaList" resultType="cinemadto">
+		select * from cinema order by cinemaid
+	</select>
+	<select id="getSeatList" resultType="seatdto">
+		select * from seat where cinemaid=#{cinemaid}
+	</select>
+	<select id="getOccupiedList" resultType="seatdto">
+		select * from seat where seatoccupied=1
+	</select>
+	<select id="getTimeCnt" parameterType="string" resultType="_int">
+		select count(*) from time where movietitle=#{movietitle}
+	</select>
+	<select id="getLastTimeNum" resultType="_int">
+		select max(timeid) from time
+	</select>
+	<select id="getTimeDetail" parameterType="_int" resultType="timedto">
+		select * from time where timeid=#{timeid}
+	</select>
+	<select id="getCinemaCnt" resultType="_int">
+		select count(*) from cinema
+	</select>
+	<select id="getLastCinemaNum" resultType="_int">
+		select max(cinemaid) from cinema
+	</select>
+	<select id="searchCinema" parameterType="_int" resultType="cinemadto">
+		select * from cinema where cinemaid=#{cinemaid}
+	</select>
+	<select id="searchTime" parameterType="_int" resultType="timedto">
+		select * from time where timeid=#{timeid}
+	</select>
+	<select id="getDetail" parameterType="string" resultType="ticketingdto">
+		select * from ticketing where ticketingid=#{ticketingid}
+	</select>
+	
+	
+	<insert id="insertTime" parameterType="timedto">
+		insert into `time` (movietitle, cinemaid, starttime, endtime)
+		values(#{movietitle},#{cinemaid},#{starttime},#{endtime})
+	</insert>
+	<insert id="insertInitialCinema">
+		insert into cinema (cinemaid) values(1);
+	</insert>
+	<insert id="insertCinema">
+		insert into cinema (cinemaid) values((select num from (select max(cinemaid) num from cinema) t)+1)
+	</insert>
+	<insert id="insertSeat" parameterType="hashmap">
+		insert into seat (seatnum, cinemaid) values (#{seatnum},#{cinemaid})
+	</insert>
+	<insert id="insertTicketing" parameterType="ticketingdto">
+		insert into `ticketing` (ticketingid,movietitle, userid, seatid, cinemaid, timeid)
+		values(#{ticketingid},#{movietitle},#{userid},#{seatid},#{cinemaid},#{timeid})
+	</insert>
+	
+
+	<update id="updateSeatOccupied" parameterType="_int">
+		update seat set seatoccupied = seatoccupied+1 where seatid=#{seatid}
+	</update>
+	<update id="cancelSeatOccupied" parameterType="_int">
+		update seat set seatoccupied = seatoccupied-1 where seatid=#{seatid}
+	</update>
+	<update id="updateTicketingTime" parameterType="timedto">
+		update `time` set starttime = #{starttime}, endtime = #{endtime}, cinemaid=#{cinemaid}, movietitle=#{movietitle}
+		where timeid = #{timeid}
+	</update>
+	<update id="updateTicketingPrice" parameterType="hashmap">
+		update ticketing set ticketingprice = #{ticketingprice} where ticketingid = #{ticketingid}
+	</update>
+	
+	
+	<delete id="removeTicketingTime" parameterType="_int">
+		delete from time where timeid=#{timeid}
+	</delete>
+	<delete id="cancelTicketing" parameterType="string">
+		delete from ticketing where ticketingid=#{ticketingid}
+	</delete>
+	<delete id="removeCinema" parameterType="_int">
+		delete from cinema where cinemaid=#{cinemaid}
+	</delete>
+	<delete id="removeSeat" parameterType="_int">
+		delete from seat where cinemaid=#{cinemaid}
+	</delete>
+</mapper>
+
+
+
+
