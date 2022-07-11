@@ -113,6 +113,7 @@
 	.title{
 		margin-top:130px;
 		
+		
 	}
 	.title h2{
 		font-size:30px;
@@ -291,32 +292,32 @@
 
 		<table class="title">
 			<tr align="center" valign="middle">
-				<td><p style="font-size:30px;">게시판 상세보기</p></td>
+				<td><p style="font-size:30px;">공지사항 상세보기</p></td>
 			</tr>
 		</table>
 		<form>
-			<table border="1" style="border-collapse: collapse;">
+			<table border="1" style="border-collapse: collapse; border-left: 2px solid #6e40c4;">
 				<tr height="30px">
-					<th align="center" width="150px">제 목</th>
+					<th align="center" width="150px" style="color: #6e40c4;">제 목</th>
 					<td>
 						<input name="boardtitle" size="50" maxlength="50"
 						 readonly value="${board.boardtitle}">
 					</td>
 				</tr>
 				<tr height="30px">
-					<th align="center" width="150px">작성자</th>
+					<th align="center" width="150px" style="color: #6e40c4;">작성자</th>
 					<td>
 						<input name="userid" size="50" maxlength="50" readonly value="${board.userid}">
 					</td>
 				</tr>
 				<tr>
-					<th>조회수</th>
+					<th style="color: #6e40c4;">조회수</th>
 					<td>
 						${board.readcount }
 					</td>
 				</tr>
 				<tr height="300px">
-					<th align="center" width="150px">내 용</th>
+					<th align="center" width="150px" style="color: #6e40c4;">내 용</th>
 					<td>
 						<textarea name="boardcontents" style="width:700px;height:290px;
 						resize:none" readonly>${board.boardcontents }</textarea>
@@ -327,10 +328,10 @@
 				<tr align="right" valign="middle">
 					<td>
 						<c:if test="${loginUser.useradmin == 1}"> 	<!--로그인 유저의 아이디가 'admin'일 때 수정, 삭제 버튼 표시가 안되서 관리자 1일때로 나타나게 변경 -->
-							<a href="${cp}/board/BoardModify.bo?boardnum=${board.boardnum}&page=${param.page}&keyword=${param.keyword}" style="border-radius:3px;color: #fff;background-color: #01738b;border-color: #01738b; font-size:15px;">수정</a>&nbsp;&nbsp;
-							<a href="${cp}/board/BoardRemove.bo?boardnum=${board.boardnum}" style="border-radius:3px;color: #fff;background-color: #01738b;border-color: #01738b; font-size:15px;">삭제</a>&nbsp;&nbsp;
+							<a href="${cp}/board/BoardModify.bo?boardnum=${board.boardnum}&page=${param.page}&keyword=${param.keyword}" style="border-radius:3px;color: #fff;background-color: #6e40c4;border-color: #6e40c4; font-size:15px;">수정</a>&nbsp;&nbsp;
+							<a href="${cp}/board/BoardRemove.bo?boardnum=${board.boardnum}" style="border-radius:3px;color: #fff;background-color: #6e40c4;border-color: #6e40c4; font-size:15px;">삭제</a>&nbsp;&nbsp;
 						</c:if>
-						<a href="${cp}/board/BoardList.bo?page=${param.page}&keyword=${param.keyword}" style="border-radius:3px;color: #fff;background-color: #01738b;border-color: #01738b; font-size:15px;">목록</a>
+						<a href="${cp}/board/BoardList.bo?page=${param.page}&keyword=${param.keyword}" style="border-radius:3px;color: #fff;background-color: #6e40c4;border-color: #6e40c4; font-size:15px;">목록</a>
 					</td>
 				</tr>
 			</table>
@@ -343,10 +344,10 @@
 				<input type="hidden" name="page" value="${param.page}">
 				<table class="write_box">
 					<tr>
-						<td>댓글</td>
+						<td style="color: #6e40c4;">댓글</td>
 						<td>
 							<textarea name="replycontents" style="width:100%"></textarea>
-							<a href="javascript:document.replyForm.submit()" style="border-radius:3px;color: #fff;background-color: #01738b;border-color: #01738b; font-size:15px;">등록</a>
+							<a href="javascript:document.replyForm.submit()" style="border-radius:3px;color: #fff;background-color: #6e40c4;border-color: #6e40c4; font-size:15px;">등록</a>
 						</td>
 					</tr>
 				</table>
@@ -358,21 +359,20 @@
 					<c:set var="i" value="0"/>
 					<c:forEach items="${replies }" var="reply">
 						<tr>
-							<td>${reply.userid}</td>
+							<td style="color: #6e40c4;">${reply.userid}</td>
 							<td>
 								<textarea readonly name="reply${i}" id="reply${i}" class="replycontents" style="width:100%">${reply.replycontents }</textarea>
 							</td>
 							<td valign="middle" style="text-align: center">
-								${reply.regdate}
-								<c:if test="${reply.updatechk == 'o' }">
-									<br>(수정됨)
-								</c:if>
+								등록일 (${reply.regdate})
+									<c:if test="${reply.updatechk == 'o' }">
+										<br>(수정됨)
+									</c:if>
 								<c:if test="${reply.userid == loginUser.userid }">
-									<br>
-									<div class="btns">
-										<a href="javascript:updateReply(${i});" id="start${i}">수정</a>
-										<a href="javascript:updateOk(${i},${reply.replynum})" style="display:none;" id="end${i}">수정완료</a>
-										<a href="javascript:deleteReply(${reply.replynum})">삭제</a>
+									<div class="btns" style="width:80px; text-align:center; margin:0 auto;">
+										<a href="javascript:updateReply(${i});" id="start${i}"style="border-radius:3px;color: #fff;background-color: #6e40c4;border-color: #6e40c4; font-size:15px;">수정</a>
+										<a href="javascript:updateOk(${i},${reply.replynum})" style="display:none; color: #fff;border-radius:3px; background-color: #6e40c4;border-color: #6e40c4;; font-size:15px;" id="end${i}">수정완료</a>
+										<a href="javascript:deleteReply(${reply.replynum})"style="border-radius:3px;color: #fff;background-color: #6e40c4;border-color: #6e40c4;; font-size:15px;">삭제</a>
 									</div>	
 								</c:if>
 							</td>

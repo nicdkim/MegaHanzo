@@ -205,6 +205,13 @@
 	header a{
 		text-decoration: none;
 	}
+	.pagination a{
+		padding:5px;
+		width:20px;
+		height:20px;
+   }
+   .pagination a:hover{
+      background-color:rgb(198,175,245);
 </style>
 </head>
 <body>
@@ -492,34 +499,34 @@
 			</div>
 			
 				<!-- pagination -->
-				<nav class="pagination">
-					<strong class="active">1</strong> 
-						<!-- <a title="2페이지보기" href="javascript:void(0)" pagenum="2">2</a> -->
+			    <nav class="pagination">
+					<strong class="active" style="background-color: #6e40c4;border-color: #6e40c4;">1</strong> 
+						 <!-- <a title="2페이지보기" href="javascript:void(0)" pagenum="2">2</a> -->
 				</nav> 
 				<!--// pagination -->
 				<!-- 페이징 처리하는 테이블 -->
-		<%-- <table class="pagination">
-			<tr align="center" valign="middle">
-				<td>
-					<c:if test="${startPage != 1}">
-						<a href="${cp}/board/BoardWrite.bo?page=${startPage-1}&keyword=${keyword}">&lt;</a>
-					</c:if>
-					<c:forEach begin="${startPage}" end="${endPage}" step="1" var="i">
-						<c:choose>
-							<c:when test="${page == i}">
-								<span class="nowPage">${i}</span>
-							</c:when>
-							<c:otherwise>
-								<a href="${cp}/board/BoardWrite.bo?page=${i}&keyword=${keyword}">${i}</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<c:if test="${endPage != totalPage }">
-						<a href="${cp}/board/BoardWrite.bo?page=${endPage+1}&keyword=${keyword}">&gt;</a>
-					</c:if>
-				</td>
-			</tr>
-		</table>  --%>
+      <%-- <table class="pagination">
+         <tr align="center" valign="middle">
+            <td>
+               <c:if test="${startPage != 1}">
+                  <a href="${cp}/board/BoardFaqList.bo?page=${startPage-1}&keyword=${keyword}">&lt;</a>
+               </c:if>
+               <c:forEach begin="${startPage}" end="${endPage}" step="1" var="i">
+                  <c:choose>
+                     <c:when test="${page == i}">
+                        <span class="nowPage">${i}</span>
+                     </c:when>
+                     <c:otherwise>
+                        <a href="${cp}/board/BoardFaqList.bo?page=${i}&keyword=${keyword}">${i}</a>
+                     </c:otherwise>
+                  </c:choose>
+               </c:forEach>
+               <c:if test="${endPage != totalPage }">
+                  <a href="${cp}/board/BoardFaqList.bo?page=${endPage+1}&keyword=${keyword}">&gt;</a>
+               </c:if>
+            </td>
+         </tr>
+      </table>  --%>
 			</div>
 		</div>
 	</div>

@@ -287,7 +287,7 @@
 			<input type="hidden" name="keyword" value="${param.keyword}">
 			<input type="hidden" name="page" value="${param.page}">
 			<!-- 게시글 작성하는 인풋들 배치 테이블 -->
-			<table border="1" style="border-collapse:collapse;">
+			<table border="1" style="border-collapse:collapse; border-left: 2px solid #6e40c4;">
 				<tr height="30px">
 					<th align="center" width="150px">
 						제 목
@@ -317,8 +317,8 @@
 			<table class="btn_area">
 				<tr align="right" valign="middle">
 					<td>
-						<a href="javascript:document.boardForm.submit()" style="border-radius:3px;color: #fff;background-color: #01738b;border-color: #01738b; font-size:15px;">수정완료</a>&nbsp;&nbsp;
-						<a href="${cp}/board/BoardList.bo?page=${param.page}&keyword=${param.keyword}" style="border-radius:3px;color: #fff;background-color: #01738b;border-color: #01738b; font-size:15px;">목록</a>
+						<a href="javascript:document.boardForm.submit()" style="border-radius:3px;color: #fff;background-color: #6e40c4;border-color: #6e40c4; font-size:15px;">수정완료</a>&nbsp;&nbsp;
+						<a href="${cp}/board/BoardList.bo?page=${param.page}&keyword=${param.keyword}" style="border-radius:3px;color: #fff;background-color: #6e40c4;border-color: #6e40c4; font-size:15px;">목록</a>
 					</td>
 				</tr>
 			</table>
