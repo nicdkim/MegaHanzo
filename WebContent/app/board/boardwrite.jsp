@@ -175,90 +175,89 @@
       font-weight:bold;
    }
    .pagination a{
-      padding:5px;
-      width:20px;
-      height:20px;
-      color: #fff;
-       background-color: #6e40c4;
-       border-color: #6e40c4;
+		padding:5px;
+		width:20px;
+		height:20px;
+		color: #fff;
+		background-color: #6e40c4;
+		border-color: #6e40c4;
    }
    .pagination a:hover{
-       color: #fff;
-       background-color: #6e40c4;
-       border-color: #6e40c4;
+		color: #fff;
+		background-color: #6e40c4;
+		border-color: #6e40c4;
    }
    .nowPage{
-      padding:5px;
-      display:inline-block;
-      border-radius:5px;
-      background-color:rgb(198,175,245);
-      color:#fff;
-      font-weight: bold;
-      width:20px;
-      height:20px;
+		padding:5px;
+      	display:inline-block;
+      	border-radius:5px;
+      	background-color:rgb(198,175,245);
+      	color:#fff;
+      	font-weight: bold;
+      	width:20px;
+      	height:20px;
    }
    a.write{
-      padding:5px;
-      width:70px;
-      height:25px;
-      text-align: center;
+     	padding:5px;
+     	width:70px;
+      	height:25px;
+      	text-align: center;
    }
    footer{
-      margin-top: 200px;
+      	margin-top: 200px;
       
    }
    #contents{
-      padding-top:200px;
+      	padding-top:200px;
    }
    
    header{
-      font-family: "Noto Sans KR", AppleSDGothicNeo-Regular, "Malgun Gothic", "맑은 고딕", dotum, "돋움", sans-serif !important;
+      	font-family: "Noto Sans KR", AppleSDGothicNeo-Regular, "Malgun Gothic", "맑은 고딕", dotum, "돋움", sans-serif !important;
    }
    
    header a{
-      text-decoration: none;
+      	text-decoration: none;
    }
    .title {
-      margin-top: 80px;
-      margin-bottom: 20px;
+      	margin-top: 80px;
+      	margin-bottom: 20px;
    }
    
-      table.type03 {
-  border-collapse: collapse;
-  text-align: left;
-  line-height: 1.5;
-  border-top: 1px solid #ccc;
-  border-left: 2px solid #6e40c4;
-  margin : 20px 10px;
-}
-table.type03 th {
-  width: 147px;
-  padding: 10px;
-  font-weight: bold;
-  vertical-align: top;
-  color: #6e40c4;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+   table.type03 {
+		border-collapse: collapse;
+  		text-align: left;
+  		line-height: 1.5;
+  		border-top: 1px solid #ccc;
+  		border-left: 2px solid #6e40c4;
+  		margin : 20px 10px;
+	}
+	table.type03 th {
+  		width: 147px;
+  		padding: 10px;
+  		font-weight: bold;
+  		vertical-align: top;
+  		color: #6e40c4;
+ 		border-right: 1px solid #ccc;
+  		border-bottom: 1px solid #ccc;
 
-}
-table.type03 td {
-  width: 349px;
-  padding: 10px;
-  vertical-align: top;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-}
+	}
+	table.type03 td {
+  		width: 349px;
+  		padding: 10px;
+  		vertical-align: top;
+  		border-right: 1px solid #ccc;
+  		border-bottom: 1px solid #ccc;
+	}
 
-.title h3{
-      font-size:1.5em;
-      color:#6e40c4;
-      text-shadow:0 0 4px deepskyblue;
-      }
-.btn_area a{
-      text-align:center;
-      padding:10px;
-      width:100px;
-      
+	.title h3{
+     	font-size:1.5em;
+      	color:#6e40c4;
+      	text-shadow:0 0 4px deepskyblue;
+    }
+	.btn_area a{
+      	text-align:center;
+      	padding:10px;
+      	width:100px;
       }
 
 </style>

@@ -100,7 +100,7 @@
       </script>
     <![endif]-->
 <style>
-body{
+	body{
 		background-color:#fff;
 	}
 	table{
@@ -123,14 +123,14 @@ body{
 		background-color:none;
 	}
 	.list>tbody>tr:nth-child(n+2):hover{
-		    color: #fff;
-    		background-color: #6e40c4;
-    		border-color: #6e40c4;
+		color: #fff;
+    	background-color: #6e40c4;
+    	border-color: #6e40c4;
 	}
 	.list>tbody>tr:nth-child(n+2):hover a{
-		    color: #fff;
-    		background-color: #6e40c4;
-    		border-color: #6e40c4;
+		color: #fff;
+    	background-color: #6e40c4;
+    	border-color: #6e40c4;
 	}
 	.list>tbody>tr>th{
 		border-top:1px solid #384d75;
@@ -171,15 +171,15 @@ body{
 	.header_area span{
 		font-weight:bold;
 	}
-	.pagination a{
-	/* 	padding:5px;
+/* 	.pagination a{
+		padding:5px;
 		width:20px;
 		height:20px;
 		color: #fff;
     	border-color: #6e40c4; 
     	background-color: #6e40c4;
-    	*/
-	}
+    	
+	} */
 	.pagination a:hover{
 	    color: #fff;
    		background-color: #6e40c4;
@@ -193,8 +193,9 @@ body{
 		color:#fff;
 		font-weight: bold;
 		width:20px;
-		height:20px;
+		height:25px;
 	}
+	
 	a.write{
 		padding:5px;
 		width:70px;
@@ -217,6 +218,7 @@ body{
 	header a{
 		text-decoration: none !important;
 	}
+
 </style>
 </head>
 <body>
@@ -351,7 +353,7 @@ body{
 					<c:forEach begin="${startPage}" end="${endPage}" step="1" var="i">
 						<c:choose>
 							<c:when test="${page == i}">
-								<span class="nowPage" style="display: inline-block;position: relative;min-width: 32px;height: 32px;margin: 0;padding: 0 8px;border: 1px solid #ebebeb;text-decoration: none;line-height: 30px;border-radius:3px;color: #fff;background-color: #6e40c4;border-color: #6e40c4;letter-spacing: 0;-webkit-text-size-adjust: 100%;">${i}</span>
+								<span class="nowPage">${i}</span>
 							</c:when>
 							<c:otherwise>
 								<a href="${cp}/board/BoardList.bo?page=${i}&keyword=${keyword}">${i}</a>

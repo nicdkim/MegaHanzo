@@ -1,0 +1,47 @@
+package app.movie;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import action.Action;
+import action.ActionTo;
+import app.movie.dao.MovieDAO;
+import app.movie.dao.ReviewDTO;
+import app.user.dao.UserDTO;
+
+public class ReviewBigWriteOkAction implements Action{
+	@Override
+	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		int movieid = Integer.parseInt(req.getParameter("movieid"));
+		int reviewstar = Integer.parseInt(req.getParameter("reviewstar"));
+		String userid = ((UserDTO)req.getSession().getAttribute("loginUser")).getUserid();
+		String reviewcontents = req.getParameter("reviewcontents");
+		
+		ReviewDTO review = new ReviewDTO();
+		review.setMovieid(movieid);
+		review.setReviewstar(reviewstar);
+		review.setUserid(userid);
+		review.setReviewcontents(reviewcontents);
+		
+		//MovieDAO mdao = new MovieDAO();
+		MovieDAO mdao = new MovieDAO();
+		ActionTo acto = new ActionTo();
+		
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html;charset=utf-8");
+		if(mdao.insertReview(review)) {
+			mdao.updateMovieRate(reviewstar, movieid);
+			int reviewid = mdao.getLastReviewid();
+			acto.setRedirect(true);
+			acto.setPath(req.getContextPath()+"/movie/ReviewView.mo?reviewid="+reviewid);
+		}
+		else {
+			acto.setRedirect(true);
+			acto.setPath(req.getContextPath()+"/movie/ReviewList.mo");
+			Cookie cookie = new Cookie("w", "f");
+			resp.addCookie(cookie);
+		}
+		return acto;
+	}
+}
