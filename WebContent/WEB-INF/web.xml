@@ -11,7 +11,7 @@
   </welcome-file-list>
   <servlet>
   	<servlet-name>UserFrontController</servlet-name>
-  	<servlet-class>app.user.UserFrontController</servlet-class>
+  	<servlet-class>com.mega.app.user.UserFrontController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>UserFrontController</servlet-name>
@@ -19,7 +19,7 @@
   </servlet-mapping>
   <servlet>
   	<servlet-name>MovieFrontController</servlet-name>
-  	<servlet-class>app.movie.MovieFrontController</servlet-class>
+  	<servlet-class>com.mega.app.movie.MovieFrontController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>MovieFrontController</servlet-name>
@@ -27,7 +27,7 @@
   </servlet-mapping>
   <servlet>
   	<servlet-name>BoardFrontController</servlet-name>
-  	<servlet-class>app.board.BoardFrontController</servlet-class>
+  	<servlet-class>com.mega.app.board.BoardFrontController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>BoardFrontController</servlet-name>
@@ -35,7 +35,7 @@
   </servlet-mapping>
   <servlet>
   	<servlet-name>TicketingFrontController</servlet-name>
-  	<servlet-class>app.ticketing.TicketingFrontController</servlet-class>
+  	<servlet-class>com.mega.app.ticketing.TicketingFrontController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>TicketingFrontController</servlet-name>
